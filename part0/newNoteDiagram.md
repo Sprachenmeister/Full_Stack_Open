@@ -1,8 +1,8 @@
 ## New Note Diagram
 
-'''mermaid
+```mermaid
 graph TD;
     A-->B;
     A-->C;
     B-->C;
-'''
+```
