@@ -1,8 +1,9 @@
 ## New Note Diagram
 
 ```mermaid
-graph TD;
-    A-->B;
-    A-->C;
-    B-->C;
+zenmul;
+    title New note diagram
+    Browser->Server: GET https://studies.cs.helsinki.fi/exampleapp/spa
+    activate server;
+    
 ```
