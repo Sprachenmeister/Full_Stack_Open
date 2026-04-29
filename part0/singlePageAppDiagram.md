@@ -16,4 +16,6 @@ sequenceDiagram
 
     browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
     server-->>browser: all notes metadata (content, date...)
+
+    browser-->server: The browser executes the callback function that renders the notes
 ```
