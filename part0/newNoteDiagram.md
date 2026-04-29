@@ -12,10 +12,10 @@ sequenceDiagram
     server-->>browser: HTML document
 
     browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
-    server-->> the CSS file
+    server-->>browser: the CSS file
 
     browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.js
-    server -->>: the JavaScrip file
+    server-->>browser: the JavaScrip file
 
     browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
     server-->>browser: the metadata
