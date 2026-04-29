@@ -2,7 +2,7 @@
 
 ```mermaid
 sequenceDiagram
-    participant Server@{ "type" : "bundary" }
+    participant Server
     participant Browser
 
     browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/spa 
