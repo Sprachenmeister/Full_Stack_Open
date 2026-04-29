@@ -12,7 +12,7 @@ sequenceDiagram
     browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/spa.js
     server-->>browser: the JavaScript file (for single page app)
     
-    Note: The browser starts executing the JavaScript code that fetches the JSON from the server.
+    browser-->server: The browser starts executing the JavaScript code that fetches the JSON from the server.
 
     browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
     server-->>browser: all notes metadata (content, date...)
