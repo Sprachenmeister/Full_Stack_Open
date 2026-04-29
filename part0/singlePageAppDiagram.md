@@ -4,5 +4,5 @@
 sequenceDiagram
 
     browser->>server: Message
-    server-->browser: Message
+    server-->>browser: Message
 ```
