@@ -1,5 +1,8 @@
 ## Single Page App Diagram
 
 ```mermaid
-  //pendiente de trabajo.
+sequenceDiagram
+
+    browser->>server
+    server-->browser
 ```
