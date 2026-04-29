@@ -3,6 +3,6 @@
 ```mermaid
 sequenceDiagram
 
-    browser->>server
-    server-->browser
+    browser->>server: Message
+    server-->browser: Message
 ```
