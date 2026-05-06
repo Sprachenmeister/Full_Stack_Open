@@ -19,9 +19,9 @@ const Content = (props) => {
   console.log(props)
   return (
     <div>
-      <Part part={props.parts.name} exercises={props.parts.exercises} />
-      <Part part={props.parts.name} exercises={props.parts.exercises} />
-      <Part part={props.parts.name} exercises={props.parts.exercises} />
+      {props.parts.map((part) => (
+        <Part key={part.name} part={part.name} exercises={part.exercises} />
+      ))}
     </div>
   )
 }
@@ -57,9 +57,7 @@ const App = () => {
   return (
     <div>
       <Header course={course.name} />
-      <Content parts={course.parts[0].name} exercises={course.parts[0].exercises} />
-      <Content parts={course.parts[1].name} exercises={course.parts[1].exercises} />
-      <Content parts={course.parts[2].name} exercises={course.parts[2].exercises} />
+      <Content parts={course.parts} exercises={course.parts} />
       <Total parts={course.parts.map((part) => part.exercises)} />
     </div>
   )
