@@ -1,52 +1,11 @@
 import { useState, useEffect } from 'react'
 import personsService from './services/persons'
+import Filter from './assets/Filter'
+import PersonForm from './assets/PersonForm'
+import Persons from './assets/Persons'
 
 const filterPersons = (persons, filter) => {
   return persons.filter(person => person.name.toLowerCase().includes(filter.toLowerCase()))
-}
-
-const Filter = (props) => {
-  return (
-    <div>
-      <p>filter shown with <input value={props.filter} onChange={props.handleFilterChange} /></p>
-    </div>
-  )
-}
-
-const PersonForm = (props) => {
-  return (
-    <div>
-      <form onSubmit={props.addContact}>
-        <div>
-          name: <input 
-          value={props.newName}
-          onChange={props.handleNewName}
-          />
-        </div>
-        <div>
-          number: <input 
-          value={props.newNumber}
-          onChange={props.handleNewNumber}
-          />
-        </div>
-        <div>
-          <button type="submit">add</button>
-        </div>
-      </form>
-     </div>
-  )
-}
-
-const Persons = (props) => {
-  return (
-    <div>
-      <ul>
-         {props.persons.map((person, index) => (
-          <li key={index}>{person.name}: {person.number}</li>
-        ))}
-      </ul>
-    </div>
-  )
 }
 
 
