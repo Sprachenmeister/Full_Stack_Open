@@ -3,6 +3,7 @@ import personsService from './services/persons'
 import Filter from './assets/Filter'
 import PersonForm from './assets/PersonForm'
 import Persons from './assets/Persons'
+import PersonRemovalError from './assets/PersonRemovalError'
 
 
 const App = () => {
@@ -10,6 +11,7 @@ const App = () => {
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [filter, setFilter] = useState('')
+  const [errorMessage, setErrorMessage] = useState(null)
 
   useEffect(() => {
     personsService
@@ -56,14 +58,20 @@ const App = () => {
 
   const deletePersonFromList = (id) => {
     const person = persons.find(p => p.id === id)
+
     if (window.confirm(`Delete ${person.name}?`)) {
       personsService
         .deletePerson(id)
-        .then(() => {
+        .then(() => { 
           setPersons(persons.filter(p => p.id !== id))
         })
-        .catch(error => {
-          alert(`Information of ${person.name} has already been removed from server`)
+        .catch((error) => {
+          setErrorMessage(
+            `Information of ${person.name} has already been removed from server`
+          )
+          setTimeout(() => {
+            setErrorMessage(null)
+          }, 5000)
           setPersons(persons.filter(p => p.id !== id))
         })
     }
@@ -72,6 +80,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <PersonRemovalError message={errorMessage} />
       <Filter 
       filter={filter} 
       handleFilterChange={(event) => 
