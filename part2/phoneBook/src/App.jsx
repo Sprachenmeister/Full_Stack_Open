@@ -4,10 +4,6 @@ import Filter from './assets/Filter'
 import PersonForm from './assets/PersonForm'
 import Persons from './assets/Persons'
 
-const filterPersons = (persons, filter) => {
-  return persons.filter(person => person.name.toLowerCase().includes(filter.toLowerCase()))
-}
-
 
 const App = () => {
   const [persons, setPersons] = useState([])
@@ -27,8 +23,17 @@ const App = () => {
     event.preventDefault()
 
     if (persons.some(p => p.name === newName)) {
-      alert(`${newName} is already in the phonebook`)
-    } else {
+      if (window.confirm(`${newName} is already in the phonebook, do you want to update the number?`)) {
+      const person = persons.find(p => p.name === newName)
+      const updatedPerson = { ...person, number: newNumber }
+      personsService
+        .update(person.id, updatedPerson)
+        .then(returnedPerson => {
+          setPersons(persons.map(p => p.id === person.id ? returnedPerson : p))
+        })
+      }
+    } 
+    else {
       const nameObject = { name: newName, number: newNumber }
       personsService
         .create(nameObject)
@@ -49,19 +54,39 @@ const App = () => {
     setNewNumber(event.target.value)
   }
 
+  const deletePersonFromList = (id) => {
+    const person = persons.find(p => p.id === id)
+    if (window.confirm(`Delete ${person.name}?`)) {
+      personsService
+        .deletePerson(id)
+        .then(() => {
+          setPersons(persons.filter(p => p.id !== id))
+        })
+    }
+  }
+
   return (
     <div>
       <h2>Phonebook</h2>
-      <Filter filter={filter} handleFilterChange={(event) => setFilter(event.target.value)} />
+      <Filter 
+      filter={filter} 
+      handleFilterChange={(event) => 
+      setFilter(event.target.value)} 
+      />
       <h3>Add a new</h3>
       <PersonForm 
         addContact={addContact} 
         newName={newName}
         handleNewName={handleNewName}
         newNumber={newNumber} 
-        handleNewNumber={handleNewNumber} />
+        handleNewNumber={handleNewNumber} 
+        />
       <h3>Numbers</h3>
-      <Persons persons={filterPersons(persons, filter)} />
+      <Persons 
+      persons={persons} 
+      filter={filter} 
+      deletePersonFromList={deletePersonFromList} 
+      />
     </div>
   )
 }

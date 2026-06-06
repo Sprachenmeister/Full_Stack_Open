@@ -1,13 +1,19 @@
-const Persons = (props) => {
+const filterPersons = (persons, filter) => {
+  return persons.filter(person => person.name.toLowerCase().includes(filter.toLowerCase()))
+}
+
+const Persons = ({ persons, filter, deletePersonFromList }) => {
+
   return (
-    <div>
       <ul>
-         {props.persons.map((person, index) => (
-          <li key={index}>{person.name}: {person.number}</li>
+        {filterPersons(persons, filter).map(person => (
+          <li key={person.id}>
+            {person.name}: {person.number}
+            <button onClick={() => deletePersonFromList(person.id)}>delete</button>
+          </li>
         ))}
       </ul>
-    </div>
-  )
+    )
 }
 
 export default Persons
