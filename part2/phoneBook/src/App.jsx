@@ -4,6 +4,7 @@ import Filter from './assets/Filter'
 import PersonForm from './assets/PersonForm'
 import Persons from './assets/Persons'
 import PersonRemovalError from './assets/PersonRemovalError'
+import PersonAddedNotification from './assets/PersonAddedNotification'
 
 
 const App = () => {
@@ -12,6 +13,7 @@ const App = () => {
   const [newNumber, setNewNumber] = useState('')
   const [filter, setFilter] = useState('')
   const [errorMessage, setErrorMessage] = useState(null)
+  const [notificationMessage, setNotificationMessage] = useState(null)
 
   useEffect(() => {
     personsService
@@ -41,6 +43,10 @@ const App = () => {
         .create(nameObject)
         .then(returnedPerson => {
           setPersons(persons.concat(returnedPerson))
+          setNotificationMessage(`Added ${returnedPerson.name}`)
+          setTimeout(() => {
+            setNotificationMessage(null)
+          }, 5000)
         })
     }
   }
@@ -81,6 +87,7 @@ const App = () => {
     <div>
       <h2>Phonebook</h2>
       <PersonRemovalError message={errorMessage} />
+      <PersonAddedNotification message={notificationMessage} />
       <Filter 
       filter={filter} 
       handleFilterChange={(event) => 
