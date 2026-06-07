@@ -12,7 +12,7 @@ const App = () => {
     if (country) {
       console.log('fetching country data...')
       axios
-        .get(`https://studies.cs.helsinki.fi/restcountries/api/name/${country}`)
+        .get(`https://studies.cs.helsinki.fi/restcountries/api/all`)
         .then(response => {
           setCountry(response.data)
         })
@@ -32,7 +32,7 @@ const onSearch = (event) => {
     <div>
       <h1>Data for Countries</h1>
       <form onSubmit={onSearch}>
-        country: <input value={country} onChange={handleChange} />
+        country: <input value={value} onChange={handleChange} />
         <button type="submit">find</button>
       </form>
       <pre>{JSON.stringify(country, null, 2)}
