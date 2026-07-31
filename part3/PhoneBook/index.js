@@ -1,7 +1,14 @@
 const express = require('express')
 const app = express()
 
+const morgan = require('morgan')
+
 app.use(express.json())
+
+morgan.token('body', (request) => JSON.stringify(request.body))
+
+app.use(morgan( ':method :url :status :res[content-length] - :response-time ms :body'))
+
 
 let persons = [
     {
@@ -56,7 +63,6 @@ const generateId = () => {
         : 0
     return String(Math.floor(Math.random() * (1000000000 - maxId)) + maxId)
 }
-
 
 app.post('/api/persons', (request, response) => {
     const body = request.body
