@@ -1,37 +1,11 @@
 require('dotenv').config()
 const express = require('express')
-const app = express()
 const morgan = require('morgan')
 const Person = require('./models/person')
 
-let persons = []
+const app = express()
 
-/*
-    [
-    {
-        "id": "1",
-        "name": "Arto Hellas",
-        "number": "040-123456"
-    },
-    {
-        "id": "2",
-        "name": "Ada Lovelace",
-        "number": "39-44-5323523"
-    },
-    {
-        "id": "3",
-        "name": "Dan Abramov",
-        "number": "12-43-234345"
-    },
-    {
-        "id": "4",
-        "name": "Mary Poppendieck",
-        "number": "39-23-6423122"
-    }
-]
-
- */
-
+let people = []
 
 const requestLogger = (request, response, next) => {
     console.log('Method:', request.method)
@@ -80,7 +54,7 @@ const generateId = () => {
  */
 
 
-app.post('/api/persons', (request, response) => {
+app.post('/api/people', (request, response) => {
     const body = request.body
 
     if (!body.name) {
@@ -111,7 +85,7 @@ app.post('/api/persons', (request, response) => {
     })
 })
 
-app.delete('/api/persons/:id', (request, response) => {
+app.delete('/api/people/:id', (request, response) => {
     const id = request.params.id
     people = people.filter(note => note.id !== id)
 
