@@ -47,7 +47,10 @@ const App = () => {
           setTimeout(() => {
             setNotificationMessage(null)
           }, 5000)
-        })
+        }).catch(error => {
+            setErrorMessage(`Person validation failed: ${error}`)
+            console.log(error.response.data.error)
+      })
     }
   }
 
