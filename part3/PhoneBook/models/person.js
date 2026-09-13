@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 
 mongoose.set('strictQuery', false)
+mongoose.set('runValidators', true)
 
 const url = process.env.MONGODB_URI
 
@@ -21,6 +22,13 @@ const personSchema = new mongoose.Schema({
     },
     number: {
         type: String,
+        minLength: 8,
+        validate: {
+            validator: function(value) {
+                return /\d{3}-\d{7}/.test(value)
+            },
+            message: props => 'Enter valid number.'
+        }
     }
 })
 
