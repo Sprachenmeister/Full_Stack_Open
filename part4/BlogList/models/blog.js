@@ -1,24 +1,32 @@
 const mongoose = require('mongoose')
 
-mongoose.set('strictQuery', false)
-
-const url = process.env.MONGODB_URI
-
-console.log('connecting to', url)
-mongoose
-    .connect(url)
-    .then(result => {
-        console.log('connected to mongoDB')
-    })
-    .catch(error => {
-        console.log('error connecting to mongoDB', error.message)
-    })
-
 const blogSchema = new mongoose.Schema({
-    title: String,
-    author: String,
+    title: {
+       type: String,
+        required: true,
+        minlength: 5,
+    },
+    author: {
+        type: String,
+        required: true,
+        minlength: 5,
+    },
     url: String,
+    content: {
+        type: String,
+        required: true,
+        minlength: 10,
+    },
     likes: Number,
+})
+
+
+blogSchema.set('toJSON', {
+    transform: (document, returnedObject) => {
+        returnedObject.id = returnedObject._id.toString()
+        delete returnedObject._id
+        delete returnedObject.__v
+    }
 })
 
 module.exports = mongoose.model('Blog', blogSchema)
