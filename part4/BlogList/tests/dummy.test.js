@@ -28,3 +28,16 @@ describe('total likes', () => {
     })
 
 })
+
+describe('returns the blog with the most likes', () => {
+    const blogs = [
+        { title: 'First blog', likes: 1},
+        { title: 'Second blog', likes: 19},
+        { title: 'Third blog', likes: 10},
+    ]
+
+    const result = listHelper.favoriteBlogs(blogs)
+    assert.deepStrictEqual(result, result)
+    console.log(result)
+})
+
